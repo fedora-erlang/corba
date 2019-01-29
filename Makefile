@@ -23,14 +23,15 @@ ifeq ($(ERL_TOP),)
 $(error ERL_TOP needs to be set)
 endif
 
-OTP_CONF := $(shell $(MAKE) -f $(ERL_TOP)/Makefile erlang_inst_libdir_configured 1>/dev/null 2>/dev/null; echo $$?)
-ifneq ($(OTP_CONF),0)
-$(error Either there is no OTP source tree in $(ERL_TOP), the OTP version is too old, or the OTP source tree has not been configured)
-endif
+#OTP_CONF := $(shell $(MAKE) -f $(ERL_TOP)/Makefile erlang_inst_libdir_configured 1>/dev/null 2>/dev/null; echo $$?)
+#ifneq ($(OTP_CONF),0)
+#$(error Either there is no OTP source tree in $(ERL_TOP), the OTP version is too old, or the OTP source tree has not been configured)
+#endif
 
-INST_DIR := $(shell $(MAKE) -f $(ERL_TOP)/Makefile erlang_inst_libdir_configured)
+#INST_DIR := $(shell $(MAKE) -f $(ERL_TOP)/Makefile erlang_inst_libdir_configured)
 
-TARGET := $(shell $(MAKE) -f $(ERL_TOP)/Makefile target_configured)
+#TARGET := $(shell $(MAKE) -f $(ERL_TOP)/Makefile target_configured)
+TARGET=target
 include $(ERL_TOP)/make/target.mk
 export TARGET
 include $(ERL_TOP)/make/$(TARGET)/otp.mk
@@ -113,7 +114,7 @@ opt debug release docs release_docs clean depend xmllint:
 	    fi ;							\
 	done ;
 
-install install-docs: TESTROOT=$(DESTDIR)$(shell $(MAKE) -f $(ERL_TOP)/Makefile erlang_inst_libdir_configured)
+install install-docs: TESTROOT=$(DESTDIR)
 
 install: release
 
