@@ -33,7 +33,7 @@ VSN=$(CORBA_VSN)
 # Common Macros
 # ----------------------------------------------------
 
-SUB_DIRECTORIES = COSS/CosNaming src examples doc/src priv
+SUB_DIRECTORIES = COSS/CosNaming src doc/src priv
 
 SPECIAL_TARGETS = 
 
