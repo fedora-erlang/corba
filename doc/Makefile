@@ -46,17 +46,17 @@ TOPDOCDIR=.
 # ----------------------------------------------------
 INDEX_FILE = index.html
 
-CSS_PATH=$(ERL_TOP)/lib/erl_docgen/priv/css
+CSS_PATH=$(DOCGEN)/priv/css
 
 CSS_FILES= \
 	$(CSS_PATH)/otp_doc.css \
 	$(CSS_PATH)/highlight.css
 
-JS_PATH=$(ERL_TOP)/lib/erl_docgen/priv/js
+JS_PATH=$(DOCGEN)/priv/js
 
 HIGHLIGHT_FILES= \
-	$(JS_PATH)/highlight.js \
-	$(JS_PATH)/highlight.pack.js
+	$(ERL_TOP)/make/highlight.js \
+	$(ERL_TOP)/make/highlight.pack.js
 
 FLIPMENU_FILES= \
 	$(JS_PATH)/flipmenu/flipmenu.js \
@@ -72,7 +72,7 @@ NOTES_GEN= $(NOTES_FILE:%.xml=%.html)
 
 RELEASE_NOTES= release_notes.html
 
-IMAGE_FILES=$(ERL_TOP)/lib/erl_docgen/priv/images/erlang-logo.png
+IMAGE_FILES=$(DOCGEN)/priv/images/erlang-logo.png
 
 # ----------------------------------------------------
 # FLAGS

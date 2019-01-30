@@ -34,8 +34,8 @@ include $(ERL_TOP)/make/output.mk
 #       Version
 # ----------------------------------------------------
 
-OTP_VERSION = 20.3.8.18
-SYSTEM_VSN = 20
+OTP_VERSION = $(shell rpm -q erlang-erts --qf "%{VERSION}")
+SYSTEM_VSN = $(shell erl -noshell -s init stop -eval "io:format(\"~s\", [erlang:system_info(otp_release)]).")
 
 # ----------------------------------------------------
 #	Cross Compiling
@@ -77,9 +77,7 @@ INSTALL_DATA    = ${INSTALL} -m 644
 CC = gcc
 GCC = yes
 HCC = $(CC)
-CC32 = gcc
-CFLAGS32 = -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic -I/home/petro/work/erlang/erts/x86_64-unknown-linux-gnu   -fno-tree-copyrename  -D_GNU_SOURCE -m32
-BASIC_CFLAGS = -Werror=undef -Werror=implicit -Werror=return-type  -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic -I/home/petro/work/erlang/erts/x86_64-unknown-linux-gnu   -fno-tree-copyrename  -D_GNU_SOURCE
+BASIC_CFLAGS = -Werror=undef -Werror=implicit -Werror=return-type $(CFLAGS) -fno-tree-copyrename  -D_GNU_SOURCE
 DEBUG_FLAGS =  -g
 LD = $(CC)
 RANLIB = ranlib
@@ -266,8 +264,8 @@ FOP = fop
 XMLLINT = xmllint
 CP = /bin/cp
 
-DOCGEN=$(ERL_TOP)/lib/erl_docgen
-FOP_CONFIG = $(DOCGEN)/priv/fop.xconf
+DOCGEN=$(shell erl -noshell -s init stop -eval "io:format(\"~s\", [code:lib_dir(erl_docgen)]).")
+FOP_CONFIG = $(ERL_TOP)/make/fop.xconf
 
 ifneq (,$(findstring $(origin SPECS_ESRC),$(DUBIOUS_ORIGINS)))
 SPECS_ESRC = ../../src
