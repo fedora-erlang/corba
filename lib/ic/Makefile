@@ -33,7 +33,7 @@ VSN=$(CORBA_VSN)
 # Common Macros
 # ----------------------------------------------------
 
-SUB_DIRECTORIES = src c_src java_src doc/src examples/pre_post_condition
+SUB_DIRECTORIES = src c_src java_src doc/src
 
 SPECIAL_TARGETS = 
 
